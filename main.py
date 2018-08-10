@@ -7,16 +7,17 @@ import argparse
 import re
 import imageio
 import logging
+import imp
 
 # 全局使用UTF-8编码
-reload(sys)
-sys.setdefaultencoding('utf-8')
+#imp.reload(sys)
+#sys.setdefaultencoding('utf-8')
 
 
 def numerical_sort(value):
     numbers = re.compile(r"(\d+)")
     parts = numbers.split(value)
-    parts[1::2] = map(int, parts[1::2])
+    parts[1::2] = list(map(int, parts[1::2]))
     return parts
 
 
@@ -38,16 +39,16 @@ def main():
     try:
         duration = float(args.duration)
     except Exception as e:
-        print "Error: duration must be a number"
+        print("Error: duration must be a number")
         logging.error(e)
         sys.exit(1)
     # 判断图片目录是否存在
     if not os.path.exists(image_path):
-        print "Error: cannot open %s" % image_path
+        print("Error: cannot open %s" % image_path)
         sys.exit(2)
     # 判断图片目录是否为文件夹
     if not os.path.isdir(image_path):
-        print "Error: %s is not a directory" % image_path
+        print("Error: %s is not a directory" % image_path)
         sys.exit(3)
     # 从图片目录读取指定格式图片，并按照文件名排序
     file_names = sorted((fn for fn in os.listdir(image_path) if fn.endswith(image_format)), key=numerical_sort)
@@ -61,3 +62,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
