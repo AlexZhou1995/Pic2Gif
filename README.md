@@ -3,6 +3,7 @@
 ## 功能
 
 将指定文件夹下的多张图片（JPG或PNG格式）按照文件名顺序合并为一张指定时间间隔的GIF图片。
+Fork from https://github.com/ntflc/Pic2Gif
 
 ## 使用的第三方库
 
